@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101827">
+<link rel="manifest" href="manifest.json">
+<title>Safe Typing</title>
+<style>
+:root{color-scheme:dark;--bg:#101827;--panel:#1b2940;--muted:#a9b8cc;--accent:#62d6b4;--line:#34445d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#f4f7fb;font:16px system-ui,sans-serif}
+main{max-width:760px;margin:auto;padding:24px 16px 48px}.brand{font-size:28px;font-weight:800;letter-spacing:.2px}.sub{color:var(--muted);margin:4px 0 22px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;margin:14px 0}
+h2{font-size:20px;margin:0 0 12px}label{display:block;color:var(--muted);font-size:14px;margin:12px 0 6px}
+input,textarea{width:100%;border:1px solid var(--line);background:#101827;color:white;border-radius:12px;padding:13px;font:inherit}
+textarea{min-height:180px;resize:vertical}button{border:0;border-radius:12px;padding:12px 16px;background:var(--accent);color:#08251e;font-weight:750;font:inherit;cursor:pointer;margin:8px 6px 0 0}
+button.secondary{background:#34445d;color:white}button.danger{background:#8c3446;color:white}.hidden{display:none!important}
+.note{border:1px solid var(--line);border-radius:12px;padding:12px;margin:9px 0;cursor:pointer}.note strong{display:block}.note small{color:var(--muted)}
+.row{display:flex;gap:8px;flex-wrap:wrap}.hint{font-size:13px;color:var(--muted);line-height:1.5}.status{color:var(--accent);min-height:22px}
+</style>
+</head>
+<body><main>
+<div class="brand">🔐 Safe Typing</div><div class="sub">Your private notes, protected on this device.</div>
+<section id="setup" class="card hidden"><h2>Create your Safe Typing password</h2>
+<p class="hint">Choose a strong password. Your notes are encrypted in this browser. If you forget the password, the notes cannot be recovered.</p>
+<label>Password</label><input id="newPass" type="password" autocomplete="new-password">
+<label>Confirm password</label><input id="confirmPass" type="password" autocomplete="new-password">
+<button id="createBtn">Create secure vault</button><p class="status" id="setupStatus"></p></section>
+<section id="login" class="card hidden"><h2>Unlock your vault</h2><label>Password</label><input id="pass" type="password" autocomplete="current-password">
+<button id="unlockBtn">Unlock</button><p class="status" id="loginStatus"></p></section>
+<section id="app" class="hidden">
+<div class="card"><div class="row"><button id="newBtn">＋ New note</button><button class="secondary" id="backupBtn">Export backup</button><button class="secondary" id="restoreBtn">Import backup</button><button class="danger" id="lockBtn">Lock</button></div>
+<input id="backupFile" type="file" accept="application/json" class="hidden">
+<p class="hint">Backup is an encrypted file. Keep it somewhere safe. Importing a backup replaces the notes currently in this vault.</p><p class="status" id="appStatus"></p></div>
+<div class="card"><h2 id="editorTitle">Your notes</h2><div id="editor" class="hidden">
+<label>Title</label><input id="title" maxlength="120" placeholder="Note title">
+<label>Write your private note</label><textarea id="body" placeholder="Start typing..."></textarea>
+<div class="row"><button id="saveBtn">Save note</button><button class="secondary" id="cancelBtn">Cancel</button><button class="danger" id="deleteBtn">Delete</button></div></div>
+<div id="notes"></div></div></section>
+<p class="hint">Prototype: data stays in this browser on this device. Export an encrypted backup regularly. This is not cloud sync; use the same browser/device or move the backup yourself.</p>
+</main>
+<script src="app.js"></script></body></html>
